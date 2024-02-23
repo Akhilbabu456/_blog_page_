@@ -1,0 +1,40 @@
+
+   <section>
+    <h1 class="text-center heading">{{title}}</h1>
+  <div class="container py-0 h-100">
+     {{> alertMessage}}
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="/images/signup.png"
+          class="img-fluid" alt="Phone image" style="width: 500px;">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+       <form action="signup" method="post" id="login">
+          
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example13">Name</label>
+            <input type="text" id="form1Example13" class="form-control form-control-lg" name="name"/>
+            
+          </div>
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example13">Email address</label>
+            <input type="email" id="form1Example13" class="form-control form-control-lg" name="email"/>
+            
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example23">Password</label>
+            <input type="password" id="form1Example23" class="form-control form-control-lg" name="password" />
+            
+          </div>
+
+         
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-lg btn-block w-100">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

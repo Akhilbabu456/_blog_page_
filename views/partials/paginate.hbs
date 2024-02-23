@@ -1,0 +1,32 @@
+{{#if hasPreviousPages}}
+<nav aria-label="Page navigation example mb-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" href="?page={{decrement req.query.page}}">Previous</a>
+        </li>
+    </ul>
+</nav>
+{{/if}}
+
+{{#if pages}}
+<nav aria-label="Page navigation example mb-4">
+    <ul class="pagination justify-content-center">
+        {{#each pages}}
+        <li class="page-item {{#if this.active}}active{{/if}}">
+            <a class="page-link" href="{{this.url}}">{{this.number}}</a>
+        </li>
+        {{/each}}
+    </ul>
+</nav>
+{{/if}}
+
+{{#if hasNextPages}}
+<nav aria-label="Page navigation example mb-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" href="?page={{increment req.query.page}}">Next</a>
+        </li>
+    </ul>
+</nav>
+{{/if}}
+

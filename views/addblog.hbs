@@ -1,0 +1,19 @@
+
+        <h1 class="heading">{{title}}</h1>
+        {{> alertMessage}}
+       <form action="addblog" method="post" id="login" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title">
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+   <textarea class="form-control" id="content" rows="5" name="content"></textarea>
+  </div>
+  <label for="upload" class="mt-4">Image: </label>
+    <input type="file" id="upload" name="avatar"/ class="file-input">
+
+  <button type="submit" class="btn btn-primary mt-3 btnlogin">Submit</button>
+</form>
+
+ 

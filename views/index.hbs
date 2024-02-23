@@ -1,0 +1,28 @@
+<div class="container">
+   {{> alertMessage }}
+<div class="card-deck d-flex mt-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 gx-3 justify-content-center">
+  {{#each cards}}
+    <div class="card col-xs-12 col-md-6 col-lg-3 col-xl-3 g-3 m-4" style="width: 18rem;">
+  <img src="{{image}}" class="card-img-top mt-1" alt="..." style="height: 130px; object-fit: cover; width: 100%;">
+  <div class="card-body" style="height: 200px;">
+    <h5 class="card-title">{{title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{publishedOnFormatted}}</h6>
+    <h6 class="card-subtitle mb-2">{{author}}</h6>
+    <p class="card-text mb-1" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{content}}</p>
+    <p class="card-text mb-1">Likes: {{likes}}</p>
+    
+    <a href="/view/{{_id}}" class="btn btn-primary">View</a>
+    <a href="/like/{{id}}" class="btn btn-danger" id="like"><i class="bi bi-heart-fill"></i></a>
+  </div>
+  </div>
+ {{/each}}
+
+ </div>
+</div>
+
+ <div class="pagination justify-content-center">
+  {{> pagination}}
+</div>
+</div>
+ 
