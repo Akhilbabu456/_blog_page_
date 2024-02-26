@@ -15,7 +15,7 @@ const userSchema= mongoose.Schema({
     likedArticles: [
         {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'article'
+          ref: 'Article'
         }
       ]
 })

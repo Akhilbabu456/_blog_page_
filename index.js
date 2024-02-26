@@ -76,7 +76,6 @@ app.use(session({
 app.use(fileUpload());
 
 app.use('/', indexRouter);
-app.use("/like/:id", indexRouter)
 app.use("/search", indexRouter)
 app.use('/view/:id', indexRouter)
 app.use("/login", loginformRouter)

@@ -5,6 +5,7 @@ const lodash= require('lodash');
 const { body, validationResult } = require("express-validator")
 const article = require("../models/article")
 const User = require("../models/users")
+const Like = require("../models/like")
 const bcrypt= require('bcrypt')
 const paginate = require("express-paginate");
 const fs = require('fs')
@@ -323,43 +324,36 @@ router.post("/view/:id/update", async (req, res) => {
     res.status(500).send("Error updating article");
   }
 });
-router.post('/like/:articleId', async (req, res) => {
-  try {
-    const { articleId } = req.params;
-    const { userId } = req.body;
-
-    const article = await article.findById(articleId);
-    article.likes.push(userId);
-    await article.save();
-
-    const user = await User.findById(userId);
-    user.likedArticles.push(articleId);
-    await user.save();
-
-    res.status(200).json({ message: 'Article liked successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error' });
-  }
-});
 router.get('/like/:id', async (req, res) => {
-  const articleId = req.params.id;
+  try{
+    const articleId  = req.params.id;
+    const  userId  = req.session.userId
 
-  try {
-    const articlerecord = await article.findById(articleId);
+    const Article = await article.findById(articleId);
+    const user = await User.findById(userId);
 
-    if (!articlerecord) {
-      return res.status(404).send('Article not found');
-    }
-
-    articlerecord.likes += 1;
-    await articlerecord.save();
-
+    // Check if the user has already liked the article
+    const like = await Like.findOne({ article: articleId, user: userId});
+    if (like){
+      await Like.deleteOne({ article: articleId, user: userId});
+      await article.findByIdAndUpdate(articleId, { $inc: { likes: -1 } }, { new: true });
+      await User.findByIdAndUpdate(userId, { $pull: { likedArticles: articleId } }, { new: true });
+      res.redirect('/user');
+    }else{
+    const newLike = new Like({ article: articleId, user: userId});
+    await newLike.save()
+    Article.likes += 1;
+    await Article.save()
+    user.likedArticles.push(articleId);
+    await user.save()
     res.redirect('/user');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
+    }
+  } catch (error) {
+    console.log(error)
   }
+  
 });
+
 router.get("/search", async(req,res)=>{
   const searchTerm = req.query.search;
   const regex = new RegExp(searchTerm, 'i')

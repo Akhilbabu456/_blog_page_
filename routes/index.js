@@ -104,25 +104,7 @@ router.get('/image/:id', async (req, res) => {
     res.status(500).send('Error getting image');
   }
 });
-router.get('/like/:id', async (req, res) => {
-  const articleId = req.params.id;
 
-  try {
-    const articlerecord = await article.findById(articleId);
-
-    if (!articlerecord) {
-      return res.status(404).send('Article not found');
-    }
-
-    articlerecord.likes += 1;
-    await articlerecord.save();
-
-    res.redirect('/');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
-});
 router.get("/search", async(req,res)=>{
   const searchTerm = req.query.search;
   const regex = new RegExp(searchTerm, 'i')
