@@ -13,7 +13,7 @@
     <p class="card-text mb-0" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{content}}</p>
      <p class="card-text mb-1">Likes: {{likes}}</p>
     <a href="/user/view/{{_id}}" class="btn btn-primary">View</a>
-    <a href="/user/like/{{id}}" class="btn btn-danger" id="like"><i class="bi bi-heart-fill"></i></a>
+    <a href="/user/like/{{id}}" class="btn {{#if like}}btn-danger{{/if}}" id="like"><i class="bi bi-heart-fill"></i></a>
   </div>
 </div>
  {{/each}}
